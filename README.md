@@ -33,15 +33,15 @@ CREATE DATABASE
 Read articles:
 
 * [x] [Building a RESTful API with Koa and Postgres](http://mherman.org/blog/2017/08/23/building-a-restful-api-with-koa-and-postgres)
-* [] [Stubbing HTTP Requests with Sinon (this article)](http://mherman.org/blog/2017/11/06/stubbing-http-requests-with-sinon)
-* [] [User Authentication with Passport and Koa](http://mherman.org/blog/2018/01/02/user-authentication-with-passport-and-koa)
-* [] [Stubbing Node Authentication Middleware with Sinon](http://mherman.org/blog/2018/01/22/stubbing-node-authentication-middleware-with-sinon)
+* [ ] [Stubbing HTTP Requests with Sinon (this article)](http://mherman.org/blog/2017/11/06/stubbing-http-requests-with-sinon)
+* [ ] [User Authentication with Passport and Koa](http://mherman.org/blog/2018/01/02/user-authentication-with-passport-and-koa)
+* [ ] [Stubbing Node Authentication Middleware with Sinon](http://mherman.org/blog/2018/01/22/stubbing-node-authentication-middleware-with-sinon)
 
 Check this resources:
-* [] [Copy files between git branches](https://xliska.wordpress.com/2010/09/22/copy-files-between-git-branches/)
-* [] [Koa vs Express](https://github.com/koajs/koa/blob/master/docs/koa-vs-express.md)
-* [] [Koa Examples](https://github.com/koajs/examples)
-* [] [Functional Testing with TestCafe](https://mherman.org/blog/functional-testing-with-testcafe/)
+* [ ] [Copy files between git branches](https://xliska.wordpress.com/2010/09/22/copy-files-between-git-branches/)
+* [ ] [Koa vs Express](https://github.com/koajs/koa/blob/master/docs/koa-vs-express.md)
+* [ ] [Koa Examples](https://github.com/koajs/examples)
+* [ ] [Functional Testing with TestCafe](https://mherman.org/blog/functional-testing-with-testcafe/)
 
 ## Resources
 * [node-koa-api (repo)](https://github.com/mjhea0/node-koa-api)
