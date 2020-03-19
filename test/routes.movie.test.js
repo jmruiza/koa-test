@@ -91,4 +91,58 @@ describe('routes : movies', () => {
         });
     });
 
+    // POST insert movie test cases
+    describe('POST /api/v1/movies', () => {
+        it('should return the movie that was added', (done) => {
+            chai.request(server)
+            .post('/api/v1/movies')
+            .send({
+                name: 'Titanic',
+                genre: 'Drama',
+                rating: 8,
+                explicit: true
+            })
+            .end((err, res) => {
+                // there should be no errors
+                should.not.exist(res.err);
+                // there should be a 201 status code
+                // (indicating that something was "created")
+                res.status.should.equal(201);
+                // the response should be JSON
+                res.type.should.equal('application/json');
+                // the JSON response body should have a
+                // key-value pair of {"status": "success"}
+                res.body.status.should.eql('success');
+                // the JSON response body should have a
+                // key-value pair of {"data": 1 movie object}
+                res.body.data[0].should.include.keys(
+                    'id', 'name', 'genre', 'rating', 'explicit'
+                );
+                done();
+            });
+        });
+
+        it('should throw an error if the payload is malformed', (done) => {
+            chai.request(server)
+            .post('/api/v1/movies')
+            .send({
+                name: 'Titanic'
+            })
+            .end((err, res) => {
+                // there should an error
+                should.exist(res.error);
+                // there should be a 400 status code
+                res.status.should.equal(400);
+                // the response should be JSON
+                res.type.should.equal('application/json');
+                // the JSON response body should have a
+                // key-value pair of {"status": "error"}
+                res.body.status.should.eql('error');
+                // the JSON response body should have a message key
+                should.exist(res.body.message);
+                done();
+            });
+          });
+    });
+
 });
