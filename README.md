@@ -6,8 +6,8 @@ Based in this [articles](#todo-list)
 ## Scripts
 
 ```bash
-yarn test # Run test cases 
-yarn start
+yarn test   # Run test cases (mochaJS)
+yarn start  # Run API
 ```
 
 ## Create databases in postgres
