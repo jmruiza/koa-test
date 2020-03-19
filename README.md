@@ -10,15 +10,37 @@ yarn test   # Run test cases (mochaJS)
 yarn start  # Run API
 ```
 
-## Create databases in postgres
+## Prerrequisites
+
+### Set .env values
+
+Copy the _.env.demo_ file as _.env_ an set the values
+
+### Create databases in postgres
 
 ```psql
 docker exec -i eclipse-postgres psql -U postgres -W
 
-# CREATE DATABASE koa_api;
-CREATE DATABASE
-# CREATE DATABASE koa_api_test;
-CREATE DATABASE
+CREATE DATABASE koa_api;
+CREATE DATABASE koa_api_test;
+```
+
+### Migrate information with KnexJS
+
+In order to run, you must install KnexJS as global:
+
+```bash
+npm install knex -g
+yarn global add knex
+```
+
+Then:
+
+```bash
+# Migrate schema for development environment
+knex migrate:latest --env development
+# Apply edited seed
+knex seed:run --env development
 ```
 
 ## Project structure
