@@ -5,33 +5,52 @@ Based in this [articles](#todo-list)
 
 ## Scripts
 
+To run first check the [prerrequisites](#prerequisites)
+
 ```bash
-yarn test   # Run test cases (mochaJS)
-yarn start  # Run API
+# Using NPM
+npm run test  # Run test cases (mochaJS)
+npm start     # Run API
+
+# Using Yarn
+yarn test     # Run test cases (mochaJS)
+yarn start    # Run API
 ```
 
 ## Prerrequisites
 
-### Set .env values
+### 1. Install packages
 
-Copy the _.env.demo_ file as _.env_ an set the values
+```bash
+npm install   # Using NPM
+yarn install  # Using Yarn
+```
 
-### Create databases in postgres
+### 1. Set .env values
+
+Copy the _.env.demo_ file as _.env_ and set the values.
+
+### 2. Create databases in postgres
 
 ```psql
-docker exec -i eclipse-postgres psql -U postgres -W
-
 CREATE DATABASE koa_api;
 CREATE DATABASE koa_api_test;
 ```
 
-### Migrate information with KnexJS
+If use a docker container:
+```psql
+docker exec -i <container> psql -U <user> -W
+CREATE DATABASE koa_api;
+CREATE DATABASE koa_api_test;
+```
+
+#### Migrate information with KnexJS
 
 In order to run, you must install KnexJS as global:
 
 ```bash
-npm install knex -g
-yarn global add knex
+npm install knex -g   # Using NPM
+yarn global add knex  # Using Yarn
 ```
 
 Then:
