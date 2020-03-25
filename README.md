@@ -26,11 +26,11 @@ npm install   # Using NPM
 yarn install  # Using Yarn
 ```
 
-### 1. Set .env values
+### 2. Set .env values
 
 Copy the _.env.demo_ file as _.env_ and set the values.
 
-### 2. Create databases in postgres
+### 3. Create databases in postgres
 
 ```psql
 CREATE DATABASE koa_api;
