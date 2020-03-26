@@ -1,7 +1,7 @@
 
 # RESTful API with KoaJS y postgres
 
-Based in this [articles](#todo-list)
+Based in this [article](#todo-list)
 
 ## Scripts
 
@@ -28,7 +28,11 @@ yarn install  # Using Yarn
 
 ### 2. Set .env values
 
+<<<<<<< Updated upstream
 Copy the _.env.demo_ file as _.env_ and set the values.
+=======
+Copy the _.env.demo_ file as _.env_ and set the values
+>>>>>>> Stashed changes
 
 ### 3. Create databases in postgres
 

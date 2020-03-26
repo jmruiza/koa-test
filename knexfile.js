@@ -1,12 +1,14 @@
-require('dotenv').config();
+// Environment configurations
+const config = require('./config')(false);
+// Imports
 const path = require('path');
 
-const BASE_PATH = path.join(__dirname, 'src', 'server', 'db');
+const BASE_PATH = path.join(__dirname, 'db');
 
 module.exports = {
   test: {
     client: 'pg',
-    connection: process.env.CONNECTION_STRING_TEST,
+    connection: config.CONNECTION_STRING_TEST,
     migrations: {
       directory: path.join(BASE_PATH, 'migrations')
     },
@@ -16,7 +18,7 @@ module.exports = {
   },
   development: {
     client: 'pg',
-    connection: process.env.CONNECTION_STRING_DEVELOPMENT,
+    connection: config.CONNECTION_STRING_DEVELOPMENT,
     migrations: {
       directory: path.join(BASE_PATH, 'migrations')
     },
