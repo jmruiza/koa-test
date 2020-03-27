@@ -1,0 +1,65 @@
+# TODO: Clear eclipse references
+
+version: "3"
+volumes:
+  postgres_data:
+  # client_src:
+
+services:
+  # Image for postgres database
+  database:
+    container_name: eclipse-postgres
+    image: postgres:10
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  backend:
+    container_name: eclipse-api
+    restart: always
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env
+    environment:
+      INIT: ${INIT}
+      NODE_ENV: ${NODE_ENV}
+      CLIENT_BUILD_PATH: ${CLIENT_BUILD_PATH}
+      SEQUELIZE_CONNECTION_STRING: ${SEQUELIZE_CONNECTION_STRING}
+    ports:
+      - 3000:3000
+    volumes:
+      - ./server:/app/api
+      - ./client/build:/app/client
+    links:
+      - database
+    depends_on:
+      - database
+
+  frontend:
+    container_name: eclipse-client
+    restart: always
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env
+    environment:
+      REACT_APP_HOST: ${REACT_APP_HOST}
+    ports:
+      - 3006:3006
+    volumes:
+      - ./client:/app
+      # - client_src:/app/build
+    links:
+      - backend
+    depends_on:
+      - backend
+
