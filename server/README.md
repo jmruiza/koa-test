@@ -28,11 +28,8 @@ yarn install  # Using Yarn
 
 ### 2. Set .env values
 
-<<<<<<< Updated upstream
 Copy the _.env.demo_ file as _.env_ and set the values.
-=======
-Copy the _.env.demo_ file as _.env_ and set the values
->>>>>>> Stashed changes
+
 
 ### 3. Create databases in postgres
 
@@ -68,10 +65,28 @@ knex seed:run --env development
 
 ## Project structure
 
-* test: Test cases for [mochaJS](https://mochajs.org/)
-* src/server: Source code for API
-  * db: All related with DB connection ([KnexJS](http://knexjs.org/))
-  * routes: Routes resolvers for API
+```
+.babelrc
+.dockerignore
+.env.demo
+Dockerfile
+index.js
+knexfile.js
+package.json
+README.md
+src - Source code
+ - api      # Express route controllers for all the endpoints of the app
+ - config   # Environment variables and initial configuration related stuff
+ - common   # Common files / helpers
+ - models   # Database models
+ - init     # Data for inicializate app -> Change for db (Knex example)
+lib - Build project
+ - api      # Express route controllers for all the endpoints of the app
+ - config   # Environment variables and initial configuration related stuff
+ - common   # Common files / helpers
+ - models   # Database models
+ - init     # Data for inicializate app -> Change for db (Knex example)
+```
 
 ## TODO List
 
