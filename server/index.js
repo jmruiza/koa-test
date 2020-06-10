@@ -1,13 +1,13 @@
 // Environment configurations
-const config = require('./config')(true);
+const config = require('./src/config')(true);
 
 // Imports
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 
 // Custom imports
-const indexRoutes = require('./routes/index');
-const movieRoutes = require('./routes/movies');
+const indexRoutes = require('./src/api/index');
+const movieRoutes = require('./src/api/movies');
  
 const app = new Koa();
 

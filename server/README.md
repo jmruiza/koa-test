@@ -80,12 +80,7 @@ src - Source code
  - common   # Common files / helpers
  - models   # Database models
  - init     # Data for inicializate app -> Change for db (Knex example)
-lib - Build project
- - api      # Express route controllers for all the endpoints of the app
- - config   # Environment variables and initial configuration related stuff
- - common   # Common files / helpers
- - models   # Database models
- - init     # Data for inicializate app -> Change for db (Knex example)
+ - lib      # Build project
 ```
 
 ## TODO List

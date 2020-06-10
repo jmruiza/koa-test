@@ -1,14 +1,14 @@
 // Environment configurations
-const config = require('./config')(false);
+const config = require('./src/config')(false);
 // Imports
 const path = require('path');
 
 const BASE_PATH = path.join(__dirname, 'db');
 
 module.exports = {
-  test: {
+  development: {
     client: 'pg',
-    connection: config.CONNECTION_STRING_TEST,
+    connection: config.CONNECTION_STRING_DEVELOPMENT,
     migrations: {
       directory: path.join(BASE_PATH, 'migrations')
     },
@@ -16,9 +16,9 @@ module.exports = {
       directory: path.join(BASE_PATH, 'seeds')
     }
   },
-  development: {
+  production: {
     client: 'pg',
-    connection: config.CONNECTION_STRING_DEVELOPMENT,
+    connection: config.CONNECTION_STRING_PRODUCTION,
     migrations: {
       directory: path.join(BASE_PATH, 'migrations')
     },

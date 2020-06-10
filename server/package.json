@@ -13,8 +13,8 @@
     "pg": "^7.18.2"
   },
   "scripts": {
-    "start": "node ./src/server/index.js",
-    "start-dev": "nodemon ./src/server/index.js",
+    "start": "node ./index.js",
+    "start-dev": "nodemon ./index.js",
     "test": "cross-env ./node_modules/mocha/bin/_mocha"
   },
   "devDependencies": {
