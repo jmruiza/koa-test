@@ -1,40 +1,74 @@
 # TODO: Clear eclipse references
 
 version: "3"
+
+# Volumes
 volumes:
-  postgres_data:
-  # client_src:
+  client_src:
+  data_production:
+  data_development:
 
 services:
-  # Image for postgres database
-  database:
-    container_name: eclipse-postgres
+  # postgres database for test and production environment
+  database_test:
+    container_name: postgres_test
     image: postgres:10
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${DEVELOPMENT_USER}
+      POSTGRES_PASSWORD: ${DEVELOPMENT_PASSWORD}
+      POSTGRES_DATABASE: ${DEVELOPMENT_DATABASE}
     ports:
-      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+      - ${DEVELOPMENT_PORT}:5432
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - data_development:/var/lib/postgresql/data
     restart: always
 
-  backend:
-    container_name: eclipse-api
+  database:
+    container_name: postgres
+    image: postgres:10 
+    environment:
+      POSTGRES_USER: ${PRODUCTION_USER}
+      POSTGRES_PASSWORD: ${PRODUCTION_PASSWORD}
+      POSTGRES_DATABASE: ${PRODUCTION_DATABASE}
+    ports:
+      - ${PRODUCTION_PORT}:5432
+    volumes:
+      - data_production:/var/lib/postgresql/data
+    restart: always
+  
+  # Testing backend
+  backend-test:
+    container_name: backend-test
     restart: always
     build:
       context: ./server
       dockerfile: ./Dockerfile
-    env_file:
-      - .env
     environment:
-      INIT: ${INIT}
-      NODE_ENV: ${NODE_ENV}
-      CLIENT_BUILD_PATH: ${CLIENT_BUILD_PATH}
-      SEQUELIZE_CONNECTION_STRING: ${SEQUELIZE_CONNECTION_STRING}
+      INIT: ${DEVELOPMENT_INIT}
+      NODE_ENV: development
+      CONNECTION_STRING_DEVELOPMENT: ${DEVELOPMENT_CONNECTION_SCRIPT}    
     ports:
       - 3000:3000
+    volumes:
+      - ./server:/app/api      
+    links:
+      - database_test
+    depends_on:
+      - database_test
+
+  # Production backend
+  backend:
+    container_name: backend
+    restart: always
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+      CLIENT_BUILD_PATH: ${PRODUCTION_CLIENT_BUILD_PATH}    
+      CONNECTION_STRING_PRODUCTION: ${PRODUCTION_CONNECTION_SCRIPT}
+    ports:
+      - 80:3000
     volumes:
       - ./server:/app/api
       - ./client/build:/app/client
@@ -43,23 +77,46 @@ services:
     depends_on:
       - database
 
-  frontend:
-    container_name: eclipse-client
-    restart: always
-    build:
-      context: ./client
-      dockerfile: ./Dockerfile
-    env_file:
-      - .env
-    environment:
-      REACT_APP_HOST: ${REACT_APP_HOST}
-    ports:
-      - 3006:3006
-    volumes:
-      - ./client:/app
-      # - client_src:/app/build
-    links:
-      - backend
-    depends_on:
-      - backend
+  # backend:
+  #   container_name: eclipse-api
+  #   restart: always
+  #   build:
+  #     context: ./server
+  #     dockerfile: ./Dockerfile
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     INIT: ${INIT}
+  #     NODE_ENV: ${NODE_ENV}
+  #     CLIENT_BUILD_PATH: ${CLIENT_BUILD_PATH}
+  #     SEQUELIZE_CONNECTION_STRING: ${SEQUELIZE_CONNECTION_STRING}
+  #   ports:
+  #     - 80:3000
+  #   volumes:
+  #     - ./server:/app/api
+  #     - ./client/build:/app/client
+  #   links:
+  #     - database
+  #   depends_on:
+  #     - database
+
+  # frontend:
+  #   container_name: eclipse-client
+  #   restart: always
+  #   build:
+  #     context: ./client
+  #     dockerfile: ./Dockerfile
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     REACT_APP_HOST: ${REACT_APP_HOST}
+  #   ports:
+  #     - 3006:3006
+  #   volumes:
+  #     - ./client:/app
+  #     # - client_src:/app/build
+  #   links:
+  #     - backend
+  #   depends_on:
+  #     - backend
 
